@@ -63,7 +63,7 @@ class Draw(QWidget):
         # End draw
         qp.end()
 
-    def loadpolygons(self):
+    def loadpolygons(self, w, h):
         # Clear polygons
         self.polygons = []
         # Select path
@@ -118,6 +118,9 @@ class Draw(QWidget):
         y_dim = max_y - min_y
 
         # Compute scale based on dominant side
+        self.window_size_x = w
+        self.window_size_y = h
+
         if self.window_size_x/self.window_size_y < x_dim/y_dim:
             scale = self.window_size_x / x_dim
             # Descale dy

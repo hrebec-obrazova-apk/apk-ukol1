@@ -64,7 +64,9 @@ class Ui_MainForm(object):
 
     def selectfile(self):
         self.Canvas.res = []
-        self.Canvas.loadpolygons()
+        w = self.Canvas.frameGeometry().width()
+        h = self.Canvas.frameGeometry().height()
+        self.Canvas.loadpolygons(w,h)
 
     def analyse(self):
         q = self.Canvas.getQ()
