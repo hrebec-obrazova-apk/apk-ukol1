@@ -176,7 +176,3 @@ class Ray_cross:
         # Point outside of polygon
         else:
             return 0
-
-
-
-

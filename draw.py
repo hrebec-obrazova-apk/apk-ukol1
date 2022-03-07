@@ -10,8 +10,6 @@ class Draw(QWidget):
         super().__init__(*args, **kwargs)
         self.q = QPoint()
         self.polygons = []
-        self.window_size_x = 804
-        self.window_size_y = 519
         self.res = []
         self.algorithm = True
 
@@ -37,14 +35,14 @@ class Draw(QWidget):
             # Start draw
             qp.begin(self)
 
-            # Set pen and brush - point
-            qp.setPen(Qt.GlobalColor.green)
-            qp.setBrush(Qt.GlobalColor.darkCyan)
-
             if len(self.res) > 0 and self.res[i] == 1:
-                # Set pen and brush - point
+                # Set pen and brush - inside polygon
                 qp.setPen(Qt.GlobalColor.green)
                 qp.setBrush(Qt.GlobalColor.magenta)
+            else:
+                # Set pen and brush - outside polygon
+                qp.setPen(Qt.GlobalColor.green)
+                qp.setBrush(Qt.GlobalColor.darkCyan)
 
             qp.drawPolygon(pol)
             i += 1
@@ -74,8 +72,8 @@ class Draw(QWidget):
             return
 
         # Open shapefile
-        shp = shapefile.Reader(path)
-        features = shp.shapes()
+        with shapefile.Reader(path) as shp:
+            features = shp.shapes()
 
         # Min and max coords
         min_x = inf
@@ -118,16 +116,16 @@ class Draw(QWidget):
         y_dim = max_y - min_y
 
         # Compute scale based on dominant side
-        self.window_size_x = w
-        self.window_size_y = h
+        window_size_x = w
+        window_size_y = h
 
-        if self.window_size_x/self.window_size_y < x_dim/y_dim:
-            scale = self.window_size_x / x_dim
+        if window_size_x/window_size_y < x_dim/y_dim:
+            scale = window_size_x / x_dim
             # Descale dy
-            y_d = self.window_size_y * (self.window_size_x / x_dim) / (self.window_size_y / y_dim)
+            y_d = window_size_y * (window_size_x / x_dim) / (window_size_y / y_dim)
         else:
-            scale = self.window_size_y / y_dim
-            y_d = self.window_size_y
+            scale = window_size_y / y_dim
+            y_d = window_size_y
 
         # Transform polygons
         for pol in polygons_jtsk:

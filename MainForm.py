@@ -66,7 +66,7 @@ class Ui_MainForm(object):
         self.Canvas.res = []
         w = self.Canvas.frameGeometry().width()
         h = self.Canvas.frameGeometry().height()
-        self.Canvas.loadpolygons(w,h)
+        self.Canvas.loadpolygons(w, h)
 
     def analyse(self):
         q = self.Canvas.getQ()
