@@ -131,7 +131,7 @@ class Ray_cross:
             return True
         return False
 
-    def getPositionPointAndPolygon(self,  q: QPoint, pol: QPolygon):
+    def getPositionPointAndPolygon(self, q: QPoint, pol: QPolygon):
         # Get number of crossing between Q-ray and edges of polygon
         k_r = 0
         k_l = 0

@@ -61,7 +61,7 @@ class Draw(QWidget):
         # End draw
         qp.end()
 
-    def loadpolygons(self, w, h):
+    def loadPolygons(self, w, h):
         # Clear polygons
         self.polygons = []
         # Select path
@@ -119,7 +119,7 @@ class Draw(QWidget):
         window_size_x = w
         window_size_y = h
 
-        if window_size_x/window_size_y < x_dim/y_dim:
+        if window_size_x / window_size_y < x_dim / y_dim:
             scale = window_size_x / x_dim
             # Descale dy
             y_d = window_size_y * (window_size_x / x_dim) / (window_size_y / y_dim)
