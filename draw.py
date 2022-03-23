@@ -11,7 +11,6 @@ class Draw(QWidget):
         self.q = QPoint()
         self.polygons = []
         self.res = []
-        self.algorithm = True
 
     def mousePressEvent(self, e: QMouseEvent):
         # Get cursor position
@@ -132,8 +131,8 @@ class Draw(QWidget):
             transformed_pol = QPolygon()
             for point in pol:
                 new_point = QPoint()
-                new_point.setX((point.x() - min_x) * scale // 1)
-                new_point.setY(y_d - (point.y() - min_y) * scale // 1)
+                new_point.setX(int((point.x() - min_x) * scale))
+                new_point.setY(int(y_d - (point.y() - min_y) * scale))
                 transformed_pol.append(new_point)
             self.polygons.append(transformed_pol)
 
@@ -147,7 +146,3 @@ class Draw(QWidget):
     def getPolygons(self):
         # Get polygon
         return self.polygons
-
-    def switchAlgorithm(self):
-        # Switch between algorithms
-        self.algorithm = not self.algorithm

@@ -51,11 +51,12 @@ class Winding_num:
         # Point is on a vertex (one norm is zero)
         if nu * nv == 0:
             return 0
+
         # Removing rounding problem
-        angle = (uv / (nu * nv))
-        if angle > 1:
-            angle = 1
-        return abs(acos(angle))
+        try:
+            return abs(acos(uv / (nu * nv)))
+        except:
+            return 0
 
     def getPositionPointAndPolygon(self, q: QPoint, pol: QPolygon) -> int:
         # Analyzes position of the point and polygon
@@ -103,19 +104,13 @@ class Ray_cross:
         pass
 
     def setLocalCoordinates(self, p: QPoint, q: QPoint):
-        p_shifted = QPoint()
-
-        # get shift of coordinate system
-        dx = q.x()
-        dy = q.y()
 
         # Compute local coordinates of point P
-        x = p.x() - dx
-        y = p.y() - dy
+        x = p.x() - q.x()
+        y = p.y() - q.y()
 
         # Point with new coordinates
-        p_shifted.setX(x)
-        p_shifted.setY(y)
+        p_shifted = QPoint(x, y)
 
         return p_shifted
 
