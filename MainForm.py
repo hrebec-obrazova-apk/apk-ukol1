@@ -1,6 +1,7 @@
 from draw import Draw
 from algorithm import *
-from PyQt6 import QtCore, QtGui, QtWidgets
+from input import *
+from PyQt6 import QtCore, QtWidgets
 
 
 class Ui_MainForm(object):
@@ -59,7 +60,8 @@ class Ui_MainForm(object):
         self.Canvas.res = []
         w = self.Canvas.frameGeometry().width()
         h = self.Canvas.frameGeometry().height()
-        self.Canvas.loadPolygons(w, h)
+        self.Canvas.polygons = Input().loadFile(w, h)
+        self.Canvas.repaint()
 
     def analyse(self):
         q = self.Canvas.getQ()
@@ -82,7 +84,6 @@ class Ui_MainForm(object):
         self.Canvas.res = []
         self.Canvas.q = QPoint()
         self.Canvas.repaint()
-        pass
 
 
 if __name__ == "__main__":
