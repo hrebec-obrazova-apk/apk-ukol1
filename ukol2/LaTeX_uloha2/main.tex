@@ -4,10 +4,12 @@
 \usepackage[english]{babel}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{gensymb}
 \usepackage{graphicx}
 \usepackage{ragged2e}
 \usepackage{blindtext}
 \usepackage{setspace}
+\usepackage{tabularx}
 \setlength{\parindent}{4em}
 \setlength{\parskip}{1em}
 \renewcommand{\baselinestretch}{1.0}
@@ -238,12 +240,77 @@ Poslední je třída \texttt{LongestEdge}, která definuje metody pro generaliza
 \indent\textit{Získej hlavní směr budovy jako směrnici nejdelší zapamatované hrany}\\
 \vspace{10cm}\\
 \section{\large{Porovnání algoritmů}}
-Pro finální porovnání generalizací byly vybrány různé typy budov z vybraných dat ve formátu \emph{.shp}. (Obr.~9) Při pohledu na první příklad budovy, výstupy algoritmů Wall Average a Longest Edge jsou téměř totožné. Výstup posledního algoritmu je podobný. V druhém případě vidíme téměř totožné výsledky generalizace pro algoritmy Minimum Area Enclosing Rectangle a Wall Average. Ve třetím případě můžeme hovořit o tvar budovy Z, která obecně způsobuje problém. Opět můžeme hovořit o podobnosti výsledků generalizace prvních dvou algoritmů a třetí se opět liší. Ve čtvrtém případě vidíme protáhlou budovu a část městského bloku. Výsledek generalizace protáhlé budovy jsou téměř totožné v případě Minimum Area Enclosing Rectangle a Longest Edge. V tomto případě jsou oba algoritmy vhodné pro tento typ budovy. Co se týká části městského bloku, tak výstupy se liší rozestupy mezi generalizovanými budovami a směrem největší budovy tohoto bloku. Téměř ve všech případech není jasné, který z algoritmů budovu nejlépe generalizoval. Vždy to bude záviset na orientaci vzhledem k ostatním prvkům mapy.
-\[\includegraphics[height=110mm]{images/porovnani-algoritmu.PNG}\]
-\[\textit{\footnotesize{Obr. 8 - Porovnání výsledků algoritmů Minimum Area Enclosing Rectangle, Wall Average a Longest Edge pro různé typy budov}}\]
+Bylo provedeno testování algoritmů na datasetech $Branik.shp, Kamyk.shp$ a $Zbraslav.shp$ o obsahu každého 100 budov. Budovy byly hodnoceny vizuálně, jedná se tedy o subjektivní hodnocení. Výsledný poměr správně vyhodnocených budov ku celkovému počtu budov je uveden v Tabulce 1 v procentech.
+\[\begin{tabular}{|p{5.8cm}|{3cm}|{3cm}|{3cm}|}
+ \hline
+ Algoritmus & oblast Braníku & oblast Kamýku & oblast Modřan \\ 
+ \hline
+ Minimum Area Enclosing Rectangle & $100\%$ & $97\%$ & $99\%$ \\
+ \hline
+ Wall Average & $98\%$ & $100\%$ & $98\%$ \\
+  \hline
+ Longest Edge & $99\%$ & $100\%$ & $100\%$ \\
+ \hline
+\end{tabular}\]
+\[\textit{\footnotesize{Tabulka 1 - Úspěšnost algoritmů pro datasety Branik.shp, Kamyk.shp a Zbraslav.shp}}\\\]
+Hned na začátku je nutné říci, že si algoritmy vedly téměř výborně na třech vybraných datasetech. Pro algoritmus Minimum Area Enclosing Rectangle byly problematické budovy, jejichž tvar obsahoval písmeno Z (Obr. 9) a nebo složitější komplex (Obr. 10). Naopak si velmi dobře poradil s budovami ve tvaru U (Obr.~11)
+\[\includegraphics[height=50mm]{images/MAER_9.PNG}\]
+\[\textit{\footnotesize{Obr. 9 - Výsledná generalizace algoritmu Minimum Area Enclosing Rectangle}}\\\]
+\[\includegraphics[height=80mm]{images/MAER_10.PNG}\]
+\[\textit{\footnotesize{Obr. 10 - Výsledná generalizace algoritmu Minimum Area Enclosing Rectangle}}\\\]
+\[\includegraphics[height=30mm]{images/MAER_11.PNG}\]
+\[\textit{\footnotesize{Obr. 11 - Výsledná generalizace algoritmu Minimum Area Enclosing Rectangle}}\\\]
+Algoritmus Wall Average měl problém s budovami podobné tvaru L (Obr. 12) nebo E (Obr. 13). 
+\[\includegraphics[height=60mm]{images/WA_12.PNG}\]
+\[\textit{\footnotesize{Obr. 12 - Výsledná generalizace algoritmu Wall Average}}\\\]
+\[\includegraphics[height=60mm]{images/WA_13.PNG}\]
+\[\textit{\footnotesize{Obr. 13 - Výsledná generalizace algoritmu Wall Average}}\\\]
+Algoritmus Longest Edge neměl téměř žádný problém s těmito datasety. Jediný problém byl u budovy ve tvaru více rozevřeného U (Obr. 14). 
+\[\includegraphics[height=70mm]{images/LE_14.PNG}\]
+\[\textit{\footnotesize{Obr. 14 - Výsledná generalizace algoritmu Longest Edge}}\\\]
+Na závěr je nutné dodat, že pro jiné datasety se výsledky budou lišit a nelze říci objektivně, který je ten nejlepší. Vždy to bude záviset na orientaci vzhledem k ostatním prvkům mapy. Na závěr v Přílohách naleznete výstupy všech algoritmů pro všechny uvedené datasety.
+\clearpage
+\newpage
 \section{\large{Zdroje}}
 BÆRENTZEN, J. A., GRAVESEN, J., ANTON, F., AENÆS, H. (2012): Convex Hulls. In: J. A. Bærentzen, J. Gravesen, F. Anton, H. Aenæs (ed.): Guide to Computational Geometry Processing - Foundations, Algorithms, and Methods. Springer, Londýn, 330 s.\\
 DE BERG, M., CHEONG, O., VAN KREVELD, M., OVERMARS, M. (2008): Computational Geometry: Algorithms and Applications. Third Edition. Springer, Berlín, Heidelberg, 388 s.\\
 DUCHÉNE, C., BARD, S., BARILLOT, X., RUAS, A., TRÉVISAN, J., HOLZAPFEL, F. (2003): Quantitative and qualitative description of building orientation. Institut Géographique National, Paříž, 11 s.
 O'ROURKE, J. (1998): Computational Geometry in C. Second Edition. Cambridge University Press, 392 s.\\
+\section{\large{Přílohy}}
+Příloha 1 - Výstup algoritmu Minimum Area Enclosing Rectangle pro dataset $Branik.shp$
+\[\includegraphics[height=140mm]{images/Branik_MAER.PNG}\]
+\clearpage
+\newpage
+Příloha 2 - Výstup algoritmu Minimum Area Enclosing Rectangle pro dataset $Kamyk.shp$
+\[\includegraphics[height=115mm]{images/Kamyk_MAER.PNG}\]
+\clearpage
+\newpage
+Příloha 3 - Výstup algoritmu Minimum Area Enclosing Rectangle pro dataset $Zbraslav.shp$
+\[\includegraphics[height=180mm]{images/Zbraslav_MAER.PNG}\]
+\clearpage
+\newpage
+Příloha 4 - Výstup algoritmu Wall Average pro dataset $Branik.shp$
+\[\includegraphics[height=140mm]{images/Branik_WA.PNG}\]
+\clearpage
+\newpage
+Příloha 5 - Výstup algoritmu Wall Average pro dataset $Kamyk.shp$
+\[\includegraphics[height=115mm]{images/Kamyk_WA.PNG}\]
+\clearpage
+\newpage
+Příloha 6 - Výstup algoritmu Wall Average pro dataset $Zbraslav.shp$
+\[\includegraphics[height=180mm]{images/Zbraslav_WE.PNG}\]
+\clearpage
+\newpage
+Příloha 7 - Výstup algoritmu Longest Edge pro dataset $Branik.shp$
+\[\includegraphics[height=140mm]{images/Branik_LE.PNG}\]
+\clearpage
+\newpage
+Příloha 8 - Výstup algoritmu Longest Edge pro dataset $Kamyk.shp$
+\[\includegraphics[height=115mm]{images/Kamyk_LE.PNG}\]
+\clearpage
+\newpage
+Příloha 9 - Výstup algoritmu Longest Edge pro dataset $Zbraslav.shp$
+\[\includegraphics[height=180mm]{images/Zbraslav_LE.PNG}\]
+\clearpage
+\newpage
 \end{document}
