@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="cs"><Esri><CreaDate>20220504</CreaDate><CreaTime>12384000</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process ToolSource="c:\arcgis\desktop10.6\ArcToolbox\Toolboxes\Spatial Analyst Tools.tbx\ExtractValuesToPoints" Date="20220504" Time="123840">ExtractValuesToPoints kupa DigitalniModelReliefu C:\Skola\algoritmy_kartografie\triangulace\data\kupa_values.shp NONE VALUE_ONLY</Process></lineage></DataProperties></Esri></metadata>
