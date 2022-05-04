@@ -395,3 +395,27 @@ class Algorithms:
 
         return aspect
 
+    def meanHeight(self, dt):
+        # Compute mena height of triangles in dt
+
+        heights: List[float] = []
+
+        # Browse list of edges by triangles
+        for i in range(0, len(dt), 3):
+            # Triangle vertices
+            p1 = dt[i].getStart()
+            p2 = dt[i + 1].getStart()
+            p3 = dt[i + 2].getStart()
+
+            # Get their heights
+            z1 = p1.getZ()
+            z2 = p2.getZ()
+            z3 = p3.getZ()
+
+            # compute mena height
+            z = (z1+z2+z3)/3
+
+            heights.append(z)
+
+        return heights
+

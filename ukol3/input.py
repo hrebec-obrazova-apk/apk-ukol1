@@ -10,6 +10,7 @@ import shapefile
 class Input:
     def __init__(self):
         self.points = []
+        self.scale = 0
         pass
 
     def loadFile(self, w, h):
@@ -17,7 +18,7 @@ class Input:
 
         # If nothing selected, end function
         if path == '':
-            return self.points
+            return self.points, self.scale
 
         # Open shapefile and load position and attributes
         with shapefile.Reader(path) as shp:
@@ -78,4 +79,6 @@ class Input:
             transformed_p = QPoint3D(x, y, z)
             self.points.append(transformed_p)
 
-        return self.points, scale
+        self.scale = scale
+
+        return self.points, self.scale

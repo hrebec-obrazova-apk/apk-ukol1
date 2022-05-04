@@ -88,8 +88,8 @@ class Ui_MainForm(object):
         icon7.addPixmap(QtGui.QPixmap("icons/color.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.actionCreate_color_hypsometry.setIcon(icon7)
         self.actionCreate_color_hypsometry.setObjectName("actionCreate_color_hypsometry")
-        self.actionClear_Triangulation = QtGui.QAction(MainForm)
-        self.actionClear_Triangulation.setObjectName("actionClear_Triangulation")
+        #self.actionClear_Triangulation = QtGui.QAction(MainForm)
+        #self.actionClear_Triangulation.setObjectName("actionClear_Triangulation")
         self.actionClear_Contour_Lines = QtGui.QAction(MainForm)
         self.actionClear_Contour_Lines.setObjectName("actionClear_Contour_Lines")
         self.actionClear_Slope = QtGui.QAction(MainForm)
@@ -100,7 +100,7 @@ class Ui_MainForm(object):
         self.actionClear_Color_Hypsometry.setObjectName("actionClear_Color_Hypsometry")
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addSeparator()
-        self.menuFile.addAction(self.actionClear_Triangulation)
+        #self.menuFile.addAction(self.actionClear_Triangulation)
         self.menuFile.addAction(self.actionClear_Contour_Lines)
         self.menuFile.addAction(self.actionClear_Slope)
         self.menuFile.addAction(self.actionClear_Exposition)
@@ -152,6 +152,24 @@ class Ui_MainForm(object):
         # Connect icon and function: compute slope
         self.actionAnalyze_Exposition.triggered.connect(self.computeAspect)
 
+        # Connect icon and function: compute Color hypsometry
+        self.actionCreate_color_hypsometry.triggered.connect(self.createColorH)
+
+        # Connect icon and function: Clear ALL
+        self.actionClear.triggered.connect(self.clearAll)
+
+        # Connect icon and function: Clear CL
+        self.actionClear_Contour_Lines.triggered.connect(self.clearCL)
+
+        # Connect icon and function: Clear Slope
+        self.actionClear_Slope.triggered.connect(self.clearSlope)
+
+        # Connect icon and function: Clear Aspect
+        self.actionClear_Exposition.triggered.connect(self.clearAspect)
+
+        # Connect icon and function: Clear Color ypsometry
+        self.actionClear_Color_Hypsometry.triggered.connect(self.clearColorH)
+
     def retranslateUi(self, MainForm):
         _translate = QtCore.QCoreApplication.translate
         MainForm.setWindowTitle(_translate("MainForm", "DTM analysis"))
@@ -171,7 +189,7 @@ class Ui_MainForm(object):
         self.actionOptions.setText(_translate("MainForm", "Options..."))
         self.actionOptions.setToolTip(_translate("MainForm", "Options"))
         self.actionCreate_color_hypsometry.setText(_translate("MainForm", "Create color hypsometry"))
-        self.actionClear_Triangulation.setText(_translate("MainForm", "Clear Triangulation"))
+        #self.actionClear_Triangulation.setText(_translate("MainForm", "Clear Triangulation"))
         self.actionClear_Contour_Lines.setText(_translate("MainForm", "Clear Contour Lines"))
         self.actionClear_Slope.setText(_translate("MainForm", "Clear Slope"))
         self.actionClear_Exposition.setText(_translate("MainForm", "Clear Exposition"))
@@ -237,6 +255,7 @@ class Ui_MainForm(object):
         self.Canvas.setSlope([])
         self.Canvas.setAspect([])
         self.Canvas.setCL([])
+        self.Canvas.setHeights([])
 
         # Compute slope
         a = Algorithms()
@@ -244,9 +263,9 @@ class Ui_MainForm(object):
         self.Canvas.setSlope(slope)
 
         self.Canvas.repaint()
-        print(self.Canvas.slope)
 
     def computeAspect(self):
+        # Get triangulation
         dt = self.Canvas.getDT()
         if len(dt) == 0:
             self.runDT()
@@ -256,6 +275,7 @@ class Ui_MainForm(object):
         self.Canvas.setSlope([])
         self.Canvas.setAspect([])
         self.Canvas.setCL([])
+        self.Canvas.setHeights([])
 
         # Compute slope
         a = Algorithms()
@@ -263,10 +283,53 @@ class Ui_MainForm(object):
         self.Canvas.setAspect(aspect)
 
         self.Canvas.repaint()
-        print(aspect)
 
+    def createColorH(self):
+        # Get triangulation
+        dt = self.Canvas.getDT()
+        if len(dt) == 0:
+            self.runDT()
+            dt = self.Canvas.getDT()
 
+        # Clear old values
+        self.Canvas.setSlope([])
+        self.Canvas.setAspect([])
+        self.Canvas.setCL([])
+        self.Canvas.setHeights([])
 
+        # Compute heights of triangles
+        a = Algorithms()
+        heights = a.meanHeight(dt)
+        self.Canvas.setHeights(heights)
+
+        self.Canvas.repaint()
+
+    def clearAll(self):
+        # Clear all
+        self.Canvas.setPoints([])
+        self.Canvas.setDT([])
+        self.Canvas.setSlope([])
+        self.Canvas.setAspect([])
+        self.Canvas.setCL([])
+        self.Canvas.setHeights([])
+
+        self.Canvas.repaint()
+
+    def clearCL(self):
+        self.Canvas.setCL([])
+        self.Canvas.repaint()
+
+    def clearSlope(self):
+        self.Canvas.setSlope([])
+        self.Canvas.repaint()
+
+    def clearAspect(self):
+        self.Canvas.setAspect([])
+        self.Canvas.repaint()
+
+    def clearColorH(self):
+        self.Canvas.setHeights([])
+        self.Canvas.repaint()
 
     def showSettings(self):
         #Show dialog window: settings

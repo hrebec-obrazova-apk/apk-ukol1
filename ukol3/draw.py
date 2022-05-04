@@ -15,9 +15,11 @@ class Draw (QWidget):
         self.points : List[QPoint3D] = []       #Input points
         self.dt : List[Edge] = []               #Delaunay edges
         self.cont_lines : List[Edge] = []       #Contour lines
+        self.heights: List[float] = []          #Heights of triangles
         self.slope: List[float] = []            #Slope of triangles faces
         self.aspect: List[float] = []           #Orientation of triangle
         self.cont_lines_step: float = 0         #Step of contour lines
+
 
     def getPoints(self):
         return self.points
@@ -42,6 +44,9 @@ class Draw (QWidget):
 
     def setStep(self, step):
         self.cont_lines_step = step
+
+    def setHeights(self, heights):
+        self.heights = heights
 
     def paintEvent(self, e: QPaintEvent):
         # Create new object
@@ -127,6 +132,8 @@ class Draw (QWidget):
                 qp.setBrush(QColor(255, 69, 0))  # orange-red
                 qp.drawPolygon(pol)
 
+        # Draw aspect
+        qp.setPen(Qt.GlobalColor.darkRed)
         for i in range(len(self.aspect)):
             # Triangle vertices
             p1 = self.dt[i*3].getStart()
@@ -176,6 +183,67 @@ class Draw (QWidget):
             elif self.aspect[i] > -67.5 and self.aspect[i] < -22.5:
                 qp.setBrush(QColor(255, 165, 0))  # Orange
                 qp.drawPolygon(pol)
+
+        # Draw color hypsometry
+        for i in range(len(self.heights)):
+            # Triangle vertices
+            p1 = self.dt[i * 3].getStart()
+            p2 = self.dt[i * 3 + 1].getStart()
+            p3 = self.dt[i * 3 + 2].getStart()
+            p1Q = QPoint(int(p1.x()), int(p1.y()))
+            p2Q = QPoint(int(p2.x()), int(p2.y()))
+            p3Q = QPoint(int(p3.x()), int(p3.y()))
+            pol = QPolygon([p1Q, p2Q, p3Q])
+
+            if self.heights[i] <= 200:
+                qp.setBrush(QColor(0, 255, 247))  # light blue
+
+            elif self.heights[i] <= 250:
+                qp.setBrush(QColor(0, 255, 179))
+
+            elif self.heights[i] <= 300:
+                qp.setBrush(QColor(0, 255, 111))
+
+            elif self.heights[i] <= 350:
+                qp.setBrush(QColor(0, 255, 85))
+
+            elif self.heights[i] <= 400:
+                qp.setBrush(QColor(26, 255, 0))
+
+            elif self.heights[i] <= 450:
+                qp.setBrush(QColor(77, 255, 0))
+
+            elif self.heights[i] <= 500:
+                qp.setBrush(QColor(102, 255, 0))
+
+            elif self.heights[i] <= 550:
+                qp.setBrush(QColor(171, 255, 0))
+
+            elif self.heights[i] <= 600:
+                qp.setBrush(QColor(222, 255, 0))
+
+            elif self.heights[i] <= 650:
+                qp.setBrush(QColor(255, 247, 0))
+
+            elif self.heights[i] <= 700:
+                qp.setBrush(QColor(255, 213, 0))
+
+            elif self.heights[i] <= 750:
+                qp.setBrush(QColor(255, 171, 0))
+
+            elif self.heights[i] <= 800:
+                qp.setBrush(QColor(255,128, 0))
+
+            elif self.heights[i] <= 850:
+                qp.setBrush(QColor(255, 94, 0))
+
+            elif self.heights[i] <= 900:
+                qp.setBrush(QColor(255, 0, 0))
+
+            else:
+                qp.setBrush(QColor(101, 0, 0))
+
+            qp.drawPolygon(pol)
 
         # End draw
         qp.end()
