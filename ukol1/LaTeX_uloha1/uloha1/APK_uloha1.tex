@@ -64,7 +64,7 @@ Pro řešení konvexního polygonu se používá opakovaný Half-Plane Test a Ra
 Algoritmus vede z bodu \emph{q}polopřímku (paprsek, ray) \emph{R} v libovolném směru. Dále je zjištěn počet průsečíků \emph{R} s $\partial$\emph{P}. Je-li počet prolnutí lichý, bod $q \in P$, pokud sudý, bod $q \notin P$. (Obr. 3)
 \[\includegraphics[height=60mm]{images/ray_crossing.PNG}\]
 \[\textit{\footnotesize{Obr. 3 - Ray Crossing Algoritmus}}\\\]
-Ke zjištění polohy bodu $q_{3}$, je potřeba upravit paprsek \emph{R} tak, aby byl horizontálně doprava. \textit{„Jedním ze způsobů, jak odstranit většinu obtíží, je vyžadovat, aby se hrana mohla počítat jako křížení R, jeden z koncových bodů e musí být přísně nad R a druhý koncový bod na nebo pod. Neformálně se má za to, že e zahrnuje svůj spodní koncový bod, ale vylučuje svůj horní koncový bod. Při použití této konvence pro q3 (Obr. 3) se hrany (1, 2) a (2, 3) nekříží (žádná hrana nemá koncový bod striktně výše). Hrany (6, 7) a (7,8) se počítají jako křížení ($v_{7}$ je na nebo pod), (3,4) a (4,5) se nekříží a (5, 6), (10, 11 ), a (11, 12) se všechny kříží. Celkový počet pěti křížení znamená, že $q\in P$. Všimněte si, že žádná hrana kolineární s paprskem se nepočítá jako křížení, protože nemá žádný bod přísně nahoře" (O'Rourke 1998, s. 240)."}\\
+Ke zjištění polohy bodu $q_{3}$, je potřeba upravit paprsek \emph{R} tak, aby byl horizontálně doprava. \textit{„Jedním ze způsobů, jak odstranit většinu obtíží, je vyžadovat, aby se hrana mohla počítat jako křížení R, jeden z koncových bodů e musí být přísně nad R a druhý koncový bod na nebo pod. Neformálně se má za to, že e zahrnuje svůj spodní koncový bod, ale vylučuje svůj horní koncový bod. Při použití této konvence pro q3 (Obr. 3) se hrany (1, 2) a (2, 3) nekříží (žádná hrana nemá koncový bod striktně výše). Hrany (6, 7) a (7,8) se počítají jako křížení ($v_{7}$ je na nebo pod), (3,4) a (4,5) se nekříží a (5, 6), (10, 11 ), a (11, 12) se všechny kříží. Celkový počet pěti křížení znamená, že $q\in P$. Všimněte si, že žádná hrana kolineární s paprskem se nepočítá jako křížení, protože nemá žádný bod přísně nahoře (O'Rourke 1998, s. 240)."}\\
 V rámci tohoto algoritmu mohou nastat situace, které je nutné v rámci algoritmu ošetřit:\begin{itemize}
     \item bod $q$ je totožný s vrcholem,
     \item polopřímka $R$ je kolineární s hranou tj. ležící na stejné přímce.
@@ -77,19 +77,19 @@ Hlubší popis algoritmu je v následujícím pseudokódu:\\
 \indent\textit{\textrm{2.~}Inicializuj počet průsečíků v levé polorovině na 0}\\
 \indent\textit{\textrm{3.~}Zjisti počet vrcholů polygonu $n$}\\
 \indent\textit{\textrm{4.~}\textbf{Projdi} jednotlivé vrcholy $p_{i}$ polygonu:}\\
-\indent\indent\textit{\textrm{5.~}Souřadnice vrcholů $p_{i}$ a $p_{i-1}$ transformuj do lokálního systému s počátkem v $q$}\\
-\indent\indent\textit{\textrm{6.~}\textbf{Když} bod $p_{i}$ leží v počátku:}\\
-\indent\indent\indent\textit{\textrm{7.~}Vrchol $p_{i}$ je totožný s $q$ a vrať, že $q$ je uvnitř polygonu a ukonči výpočet}\\
-\indent\indent\textit{\textrm{8.~}\textbf{Když} úsečka $p_{i}$ a $p_{i-1}$ protíná osu y z pohledu z horní poloroviny:}\\
-\indent\indent\indent\textit{\textrm{9.~}Vypočítej souřadnici x jejich průsečíku}\\
-\indent\indent\indent\textit{\textrm{10.~}\textbf{Je-li} tato souřadnice v pravé polorovině:}\\
-\indent\indent\indent\indent\textit{\textrm{11.~}Přičti k počtu průsečíkům v pravé polorovině 1}\\
-\indent\textit{\textrm{12.~}\textbf{Když} součty průsečíků vpravo a vlevo nejsou oba naráz sudé nebo oba liché:}\\
-\indent\indent\textit{\textrm{13.~}Bod je na hraně polygonu}\\
-\indent\textit{\textrm{14.~}\textbf{Jinak když} je součet průsečíků vpravo lichý:}\\
-\indent\indent\textit{\textrm{15.~}Bod je uvnitř polygonu}\\
-\indent\textit{\textrm{16.~}\textbf{Jinak:}}\\
-\indent\indent\textit{\textrm{17.~}Bod je mimo polygon.}
+\indent\indent\textit{\textbullet\ Souřadnice vrcholů $p_{i}$ a $p_{i-1}$ transformuj do lokálního systému s počátkem v $q$}\\
+\indent\indent\textit{\textbullet\ \textbf{Když} bod $p_{i}$ leží v počátku:}\\
+\indent\indent\indent\textit{\textrm{- }Vrchol $p_{i}$ je totožný s $q$ a vrať, že $q$ je uvnitř polygonu a ukonči výpočet}\\
+\indent\indent\textit{\textbullet\ \textbf{Když} úsečka $p_{i}$ a $p_{i-1}$ protíná osu y z pohledu z horní poloroviny:}\\
+\indent\indent\indent\textit{\textrm{- }Vypočítej souřadnici x jejich průsečíku}\\
+\indent\indent\indent\textit{\textrm{- }\textbf{Je-li} tato souřadnice v pravé polorovině:}\\
+\indent\indent\indent\indent\textit{\textbullet\ Přičti k počtu průsečíkům v pravé polorovině 1}\\
+\indent\textit{\textrm{5.~}\textbf{Když} součty průsečíků vpravo a vlevo nejsou oba naráz sudé nebo oba liché:}\\
+\indent\indent\textit{\textbullet\ Bod je na hraně polygonu}\\
+\indent\textit{\textrm{6.~}\textbf{Jinak když} je součet průsečíků vpravo lichý:}\\
+\indent\indent\textit{\textbullet\ Bod je uvnitř polygonu}\\
+\indent\textit{\textrm{7.~}\textbf{Jinak:}}\\
+\indent\indent\textit{\textbullet\ Bod je mimo polygon.}
 \subsubsection{\small{Singularity u algoritmu Ray Crossing}}
 \subsection{\small{Winding Number algoritmus}}
 V tomto algoritmu, jak již z názvu vypovídá, hraje roli winding number $\omega$. Definujeme ho jako počet,  kolikrát se mnohoúhelník \emph{P} otočí kolem bodu \emph{q}. Je-li bod \emph{q} uvnitř polygonu \emph{P}, je $\omega$ nenulové. To samé platí, pokud je bod \emph{q} mimo polygon \emph{P} a polygon se neotáčí kolem bodu. (Obr. 4, Kumar, Bangi 2018)
@@ -108,16 +108,16 @@ Hlubší popis metody je v následujícím pseudokódu:\\
 \indent\textit{{1.~}Zjisti počet vrcholů polygonu $n$}\\
 \indent\textit{{2.~}Inicializuj součet úhlů mezi definovaným bodem a hranou polygonu na 0}\\
 \indent\textit{{3.~}\textbf{Projdi} jednotlivé vrcholy $p_{i}$ polygonu:}\\
-\indent\indent\textit{{4.~}Zjisti polohu bodu $q$ vůči přímce $qp_{i}$}\\
-\indent\indent\textit{{5.~}Vypočti úhel mezi přímkami $qp_{i}$, $qp_{i+1}$}\\
-\indent\indent\textit{{6.~}\textbf{Když} je bod v levé polorovině,}\\
-\indent\indent\indent\textit{{7.~}Přičti úhel k celkovému součtu uhlů}\\
-\indent\indent\textit{{8.~}\textbf{Když} je bod v pravé polorovině,}\\
-\indent\indent\indent\textit{{9.~}Odečti úhel od celkového součtu úhlů}\\
-\indent\indent\textit{{10.~}\textbf{Jinak,}}\\
-\indent\indent\indent\textit{{11.~}Leží-li bod $q$ mezi body $p_{i}$ a $p_{i+1}$, bod se nachází na hraně a ukončí výpočet}\\
+\indent\indent\textit{\textbullet\ Zjisti polohu bodu $q$ vůči přímce $qp_{i}$}\\
+\indent\indent\textit{\textbullet\ Vypočti úhel mezi přímkami $qp_{i}$, $qp_{i+1}$}\\
+\indent\indent\textit{\textbullet\ \textbf{Když} je bod v levé polorovině,}\\
+\indent\indent\indent\textit{\textrm{- }Přičti úhel k celkovému součtu uhlů}\\
+\indent\indent\textit{\textbullet\ \textbf{Když} je bod v pravé polorovině,}\\
+\indent\indent\indent\textit{\textrm{- }Odečti úhel od celkového součtu úhlů}\\
+\indent\indent\textit{\textbullet\ \textbf{Jinak,}}\\
+\indent\indent\indent\textit{\textrm{- }Leží-li bod $q$ mezi body $p_{i}$ a $p_{i+1}$, bod se nachází na hraně a ukončí výpočet}\\
 \indent\textit{{12.~}\textbf{Když} je celkový součet úhlů roven 2$\pi$:}\\
-\indent\indent\textit{{13.~}Bod je uvnitř polygonu}\\
+\indent\indent\textit{\textbullet\ Bod je uvnitř polygonu}\\
 \indent\textit{{14.~}\textbf{Jinak} je vně polygonu.}\\
 \vspace{0.2cm}\\
 V rámci tohoto algoritmu může nastat situace, která je nutná v rámci algoritmu ošetřit:\begin{itemize}
