@@ -101,35 +101,35 @@ class Draw (QWidget):
             pol = QPolygon([p1Q, p2Q, p3Q])
 
             if self.slope[i] < 0.5:
-                qp.setBrush(QColor(0, 100, 0))  # dark green
+                qp.setBrush(QColor(255, 255, 255))
                 qp.drawPolygon(pol)
 
             elif self.slope[i] < 1.5:
-                qp.setBrush(QColor(34, 139, 34))  # green
+                qp.setBrush(QColor(230, 230, 230))
                 qp.drawPolygon(pol)
 
             elif self.slope[i] < 3:
-                qp.setBrush(QColor(50, 205, 50))  # Lime green
+                qp.setBrush(QColor(200, 200, 200))
                 qp.drawPolygon(pol)
 
             elif self.slope[i] < 6:
-                qp.setBrush(QColor(73, 255, 47))  # Yellow-green
+                qp.setBrush(QColor(180, 180, 180))
                 qp.drawPolygon(pol)
 
             elif self.slope[i] < 15:
-                qp.setBrush(QColor(255, 255, 0))  # yellow
+                qp.setBrush(QColor(130, 130, 130))
                 qp.drawPolygon(pol)
 
             elif self.slope[i] < 30:
-                qp.setBrush(QColor(255, 215, 0))  # gold
+                qp.setBrush(QColor(90, 90, 90))
                 qp.drawPolygon(pol)
 
             elif self.slope[i] < 45:
-                qp.setBrush(QColor(255, 140, 0))  # orange
+                qp.setBrush(QColor(50, 50, 50))
                 qp.drawPolygon(pol)
 
             else:
-                qp.setBrush(QColor(255, 69, 0))  # orange-red
+                qp.setBrush(QColor(10, 10, 10))
                 qp.drawPolygon(pol)
 
         # Draw aspect
